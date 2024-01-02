@@ -3,20 +3,37 @@ const express = require('express')
 const axios = require('axios')
 const Apod = require('../models/apod')
 const apod = process.env.APOD_API_URL  //TODO <-------------
+const imageVideoLib = process.env.IMAGE_VIDEO_LIBRARY
+
 const apiKey = process.env.API_KEY //TODO <--------------
+
 //const Place = require('../models/place')
 
 //************************* Create Router *****************************//
 const router = express.Router()
 
 //************************* Routers & Controllers *********************//
-router.get('/show', (req, res)=>{
 
-    axios(`${apod}?${apiKey}`)
-        .then(apiRes => {
-            const foundData = apiRes.data
-            res.render('apod/show', {apod: foundData})
+//** NASA Image Video Library */
+//Search bar to find image or video
+router.get('/search', (req, res) =>{
+    res.render('imageVideoLib/search')
+})
+
+//Search response with all images or videos matching search keywords
+router.get('/index', (req, res) =>{
+    //TODO User must search, grab keyword from req.body
+    const {searchKeyword} = req.body
+    axios(`${imageVideoLib}/search?q=${searchKeyword.search}`) //<-- add "/search?q={'KEYWORD HERE'}"
+        .then(apiRes =>{
+            const foundData = apiRes.data 
+            res.render('imageVideoLib/index', {imageVideo: foundData})
         })
+})
+
+//Showing the video or image and able to favorite and save to users list
+router.get('/show', (req,res)=>{
+
 })
 
 //********************* Export **********************//

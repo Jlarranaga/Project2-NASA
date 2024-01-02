@@ -13,7 +13,8 @@ app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
 
 //************************ Import Routers **************************//
-const nasaRouter = require('./controllers/nasaControllers')
+const apodRouter = require('./controllers/apodControllers')
+const imageVideoLib = require('./controllers/imageVidLibControllers')
 
 //************************ Middleware ******************************//
 middleware(app);
@@ -24,7 +25,8 @@ app.get('/', (req, res) =>{ //<-- Home Page
     res.render('home.ejs')
 })
 
-app.use('/apod', nasaRouter)
+app.use('/apod', apodRouter)
+app.use('/imageVideoLib', imageVideoLib)
 
 //************************ Server Listener *************************//
 const PORT = process.env.PORT
