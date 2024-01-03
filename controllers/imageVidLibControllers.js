@@ -20,23 +20,37 @@ router.get('/search', (req, res) =>{
     res.render('imageVideoLib/search')
 })
 
-//Search response with all images or videos matching search keywords
-router.post('/index', (req, res) =>{
+//Search response with all images matching search keywords
+router.post('/imageIndex', (req, res) =>{
     //TODO User must search, grab keyword from req.body
     const {search} = req.body
-    console.log('the search?', search)
-    console.log('req body', req.body)
-    axios(`${imageVideoLib}/search?q=${search}`) //<-- add "/search?q={'KEYWORD HERE'}"
+    //console.log('the search?', search)
+    //console.log('req body', req.body)
+    axios(`${imageVideoLib}/search?q=${search}&media_type=image&page_size=50`) //<-- add "/search?q={'KEYWORD HERE'}"
         .then(apiRes =>{
             const foundData = apiRes.data 
             console.log('the data?', foundData)
-            res.render('imageVideoLib/index', {imageVideo: foundData})
+            res.render('imageVideoLib/imageIndex', {imageVideo: foundData})
+            
+        })
+})
+
+router.post('/videoIndex', (req, res) =>{
+    //TODO User must search, grab keyword from req.body
+    const {search} = req.body
+    //console.log('the search?', search)
+    //console.log('req body', req.body)
+    axios(`${imageVideoLib}/search?q=${search}&media_type=video&page_size=50`) //<-- add "/search?q={'KEYWORD HERE'}"
+        .then(apiRes =>{
+            const foundData = apiRes.data 
+            console.log('the data?', foundData)
+            res.render('imageVideoLib/videoIndex', {imageVideo: foundData})
             
         })
 })
 
 //Showing the video or image and able to favorite and save to users list
-router.get('/show', (req,res)=>{
+router.get('/:id', (req,res)=>{
 
 })
 
