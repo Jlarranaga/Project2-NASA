@@ -21,13 +21,17 @@ router.get('/search', (req, res) =>{
 })
 
 //Search response with all images or videos matching search keywords
-router.get('/index', (req, res) =>{
+router.post('/index', (req, res) =>{
     //TODO User must search, grab keyword from req.body
-    const {searchKeyword} = req.body
-    axios(`${imageVideoLib}/search?q=${searchKeyword.search}`) //<-- add "/search?q={'KEYWORD HERE'}"
+    const {search} = req.body
+    console.log('the search?', search)
+    console.log('req body', req.body)
+    axios(`${imageVideoLib}/search?q=${search}`) //<-- add "/search?q={'KEYWORD HERE'}"
         .then(apiRes =>{
             const foundData = apiRes.data 
+            console.log('the data?', foundData)
             res.render('imageVideoLib/index', {imageVideo: foundData})
+            
         })
 })
 

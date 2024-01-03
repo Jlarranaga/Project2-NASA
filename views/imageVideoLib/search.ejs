@@ -4,27 +4,13 @@
 
     <h2>NASA Image and Video Library</h2>
 
-    <form action="/imageVideoLib/index" method="GET">
+    <form action="/imageVideoLib/index" method="POST">
 
         <input type="text" placeholder="Image/Video Search" name="search">
         <input type="submit">
     </form>
 
     <img src='' alt="NASA image of the day"> 
-</div>
-
-<div class="container center">
-    <div class="container row text-center">
-        <% imageVideo.forEach(function(i){ %>
-            <div class="card mt-3 me-3 countryCard">
-                <img src="<%= imageVideo.img_src%>" alt="NASA Image" class="card-img-top mt-3">
-                <div class="card-body">
-                    <h5 class="card-title"><%= imageVideo.earth_date%></h5>
-                    <a href="/places/<%= imageVideo.id%>" class="btn">Image Details</a>
-                </div>
-            </div>
-        <% }) %>
-    </div>
 </div>
 
 <%- include('../partials/footer') %>
