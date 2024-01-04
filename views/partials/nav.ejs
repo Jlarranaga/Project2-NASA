@@ -8,15 +8,16 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div id="navbarNav" class="collapse navbar-collapse me-3">
-            <% //if (loggedIn) {%>
-                <!-- <a href="/places/all" class="nav-link text-light me-3">All Countries</a>
-                <a href="/places/mine" class="nav-link text-light me-3">My Places</a>
-                <a href="/users/logout" class="nav-link text-light me-3">Log Out</a> -->
-            <%//} else {%>
-                <a href="/apod/show" class="nav-link text-light me-3">NASA Image of the day</a>
-                <a href="/imageVideoLib/search" class="nav-link text-light me-3">NASA Image/Video Library</a>
-                <a href="/users/login" class="nav-link text-light me-3">Log In</a>
-            <% //} %>
+            <% if (user) {%>
+                <a href="/apod/show" class="nav-link text-light me-3">Image of the day</a>
+                <a href="/imageVideoLib/search" class="nav-link text-light me-3">Image-Video Library</a>
+                <a href="/favorites/all" class="nav-link text-light me-3">My Favorites</a>
+                <a href="/logout" class="nav-link text-light me-3">Log Out</a>
+            <%} else {%>
+                <a href="/apod/show" class="nav-link text-light me-3">Image of the day</a>
+                <a href="/imageVideoLib/search" class="nav-link text-light me-3">Image-Video Library</a>
+                <a href="/auth/google" class="login" class="nav-link text-light me-3">LOG IN&nbsp;<img src="https://i.imgur.com/FHjYyi0.png"></a>
+            <% } %>
         </div>
     </div>
 </nav>
