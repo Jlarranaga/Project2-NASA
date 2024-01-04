@@ -1,9 +1,11 @@
 //************************ Import Dependencies *********************//
 const express = require('express')
+const bodyParser = require('body-parser')
 const {appendFile} = require('fs')
 require('dotenv').config()
 const path = require('path')
 const middleware = require('./utils/middleware')
+
 
 //************************ Create App Object ***********************//
 const app = express()
@@ -27,6 +29,9 @@ app.get('/', (req, res) =>{ //<-- Home Page
 
 app.use('/apod', apodRouter)
 app.use('/imageVideoLib', imageVideoLib)
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 
 //************************ Server Listener *************************//
 const PORT = process.env.PORT

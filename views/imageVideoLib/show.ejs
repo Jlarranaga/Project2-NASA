@@ -1,0 +1,58 @@
+<%- include('../partials/header') %>
+
+<div class="container center">
+
+    <% if(imageVideo.collection.items[0].data[0].media_type === 'image'){%>
+
+    <h2><%= imageVideo.collection.items[0].data[0].title %></h2>
+    <div class="container col" style="width: 18rem">
+        <img src="<%= imageVideo.collection.items[0].links[0].href%>" alt="NASA Image" class="nasaImage">
+    </div>
+    <table class="table table-striped mt-3">
+        <thead>
+            <tr>
+                <th scope="col">Date</th>
+                <th scope="col">Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td scope="row"><%= imageVideo.collection.items[0].data[0].date_created%></td>
+                <td scope="row"><%= imageVideo.collection.items[0].data[0].description%></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <% }else{ %>
+
+        <h2><%= imageVideo.collection.items[0].data[0].title %></h2>
+    <div class="container col" style="width: 18rem">
+        
+        <video playsinline autoplay class="nasaVideo">
+        <source src="<%= imageVideo.collection.items[0].links[0].href%>">
+    </video>
+    </div>
+    <table class="table table-striped mt-3">
+        <thead>
+            <tr>
+                <th scope="col">Date</th>
+                <th scope="col">Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td scope="row"><%= imageVideo.collection.items[0].data[0].date_created%></td>
+                <td scope="row"><%= imageVideo.collection.items[0].data[0].description%></td>
+            </tr>
+        </tbody>
+    </table>
+
+        <% }%>
+
+    <% console.log('passed info: ', imageVideo) %>
+<button type="button" id="playPause"><%//vid%></button>
+
+
+</div>
+
+<%- include('../partials/footer') %>

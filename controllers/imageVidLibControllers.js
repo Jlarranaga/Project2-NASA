@@ -29,7 +29,7 @@ router.post('/imageIndex', (req, res) =>{
     axios(`${imageVideoLib}/search?q=${search}&media_type=image&page_size=50`) //<-- add "/search?q={'KEYWORD HERE'}"
         .then(apiRes =>{
             const foundData = apiRes.data 
-            console.log('the data?', foundData)
+            //console.log('the data?', foundData)
             res.render('imageVideoLib/imageIndex', {imageVideo: foundData})
             
         })
@@ -43,7 +43,6 @@ router.post('/videoIndex', (req, res) =>{
     axios(`${imageVideoLib}/search?q=${search}&media_type=video&page_size=50`) //<-- add "/search?q={'KEYWORD HERE'}"
         .then(apiRes =>{
             const foundData = apiRes.data 
-            console.log('the data?', foundData)
             res.render('imageVideoLib/videoIndex', {imageVideo: foundData})
             
         })
@@ -52,6 +51,13 @@ router.post('/videoIndex', (req, res) =>{
 //Showing the video or image and able to favorite and save to users list
 router.get('/:id', (req,res)=>{
 
+    const id = req.params.id
+
+    axios(`${imageVideoLib}/search?nasa_id=${id}`)
+    .then(apiRes =>{
+        const foundData = apiRes.data
+        res.render('imageVideoLib/show', {imageVideo: foundData})
+    })
 })
 
 //********************* Export **********************//

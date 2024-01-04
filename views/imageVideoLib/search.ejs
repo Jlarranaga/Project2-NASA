@@ -6,9 +6,16 @@
 
     <form action="/imageVideoLib/imageIndex" method="POST">
 
-        <input type="text" placeholder="Image Search" name="search">
+        <input type="text" placeholder="Image Search" name="search"><br>
+        <input type="radio" name="imageVideo" id="image" value="image">
+        <label for="image">Image</label> <br>
+        <input type="radio" name="imagevideo" id="video" value="video">
+        <label for="video">Video</label><br>
+        
         <input type="submit">
     </form>
+
+    
 
     <form action="/imageVideoLib/videoIndex" method="POST">
 
