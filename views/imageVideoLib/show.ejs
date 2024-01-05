@@ -22,6 +22,7 @@
             </tr>
         </tbody>
     </table>
+    <a href="../imageVidLib/imageIndex"> Back to Images</a>
 
     <% }else{ %>
 
@@ -46,8 +47,24 @@
             </tr>
         </tbody>
     </table>
+    <a href="../imageVidLib/videoIndex"> Back to Videos</a>
 
         <% }%>
+
+        <% if(user){ %>
+            <h5>Add to Favorites?</h5>
+            <form action="../favorite/add" method="POST">
+                <fieldset>
+                <input hidden type="text" name="item" value="<%= imageVideo %>">
+                <input hidden type="text" name="user" value="<% user %>">
+            </fieldset>
+            <input type="submit" value="Add Favorite">
+            </form>
+            <% } else { %>
+                <a href="../auth/google">Log in</a>
+                <% } %>
+
+                
 
     <% console.log('passed info: ', imageVideo) %>
 <button type="button" id="playPause"><%//vid%></button>

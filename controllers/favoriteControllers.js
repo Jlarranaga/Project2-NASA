@@ -2,6 +2,7 @@
 const express = require('express')
 const axios = require('axios')
 const Apod = require('../models/apod')
+const Favorite = require('../models/favorite')
 const apod = process.env.APOD_API_URL  //TODO <-------------
 const imageVideoLib = process.env.IMAGE_VIDEO_LIBRARY
 
@@ -16,25 +17,39 @@ const router = express.Router()
 
 //** NASA Image Video Library */
 //Search bar to find image or video
-router.get('/search', (req, res) =>{
+router.get('/all', (req, res) =>{
+
     res.render('imageVideoLib/search')
 })
 
 //Search response with all images matching search keywords
-router.post('/imageIndex', (req, res) =>{
-    //TODO User must search, grab keyword from req.body
-    const {search} = req.body
-    //console.log('the search?', search)
-    //console.log('req body', req.body)
-    axios(`${imageVideoLib}/search?q=${search}&media_type=image&page_size=50`) //<-- add "/search?q={'KEYWORD HERE'}"
-        .then(apiRes =>{
-            const foundData = apiRes.data 
-            //console.log('the data?', foundData)
-            res.render('imageVideoLib/imageIndex', {imageVideo: foundData})
-            
+router.post('/add', (req, res) =>{
+    const {user} = req.session.passport
+
+    const fav = req.body
+    fav.owner = user
+    
+    Favorite.create(fav)
+        .then(newFav =>{
+            res.redirect(`/favorite/index`)
         })
+
+
+    //res.json({requestedBody: req.body})
+    console.log('reqbody: ', fav)
+    console.log('reqSession: ', user)
 })
 
+//const {search} = req.body
+//console.log('the search?', search)
+//console.log('req body', req.body)
+//axios(`${imageVideoLib}/search?q=${search}&media_type=image&page_size=50`) //<-- add "/search?q={'KEYWORD HERE'}"
+    //.then(apiRes =>{
+       // const foundData = apiRes.data 
+        //console.log('the data?', foundData)
+        //res.render('imageVideoLib/imageIndex', {imageVideo: foundData})
+        
+   // })
 router.post('/videoIndex', (req, res) =>{
     //TODO User must search, grab keyword from req.body
     const {search} = req.body
