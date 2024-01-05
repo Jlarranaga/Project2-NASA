@@ -6,14 +6,16 @@ const path = require('path')
 const middleware = require('./utils/middleware')
 const session = require('express-session')
 const passport = require('passport')
+const serveIndex = require('serve-index')
 
 require('dotenv').config()
 require('./utils/connection')
 require('./utils/middleware')
 require('./utils/passport')
 
+
 //************************ Create App Object ***********************//
-const app = express()
+const app = express();
 
 //************************ Set Up View Engine **********************//
 app.set('views', path.join(__dirname, 'views'))
@@ -28,14 +30,20 @@ const favoriteRouter = require('./controllers/favoriteControllers')
 middleware(app);
 
 //************************ Routes **********************************//
+app.use(passport.initialize());
+app.use(passport.session());
+app.use("/public/videos", express.static(__dirname + "/public/videos"))
+
+app.use(function (req, res, next) {
+    res.locals.user = req.user;
+    next();
+  });
+
 app.get('/', (req, res) =>{ //<-- Home Page
     //TODO Add user verfication here
     res.render('home.ejs')
 })
 
-app.use('/apod', apodRouter)
-app.use('/imageVideoLib', imageVideoLib)
-app.use('/favorite', favoriteRouter)
 app.use(bodyParser.urlencoded({
     extended: true
 }));
@@ -44,8 +52,11 @@ app.use(session({
     resave: false,
     saveUninitialized: true
   }));
-app.use(passport.initialize());
-app.use(passport.session());
+  
+
+app.use('/apod', apodRouter)
+app.use('/imageVideoLib', imageVideoLib)
+app.use('/favorite', favoriteRouter)
 
 //************************ Server Listener *************************//
 const PORT = process.env.PORT
