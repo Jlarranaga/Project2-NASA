@@ -20,3 +20,9 @@
     right: 0;
     z-index: -1; 
   }
+
+  .h1Home {
+    text-shadow: 0 0 5px #fcfcfc, 0 0 5px #ffffff;
+    color: rgb(5, 5, 5);
+    text-align: center;
+  }

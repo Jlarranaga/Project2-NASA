@@ -4,7 +4,7 @@ const passport = require('passport');
 
 
 router.get('/', function(req, res, next) {
-  res.redirect('/home');
+    res.render('home')
 });
 
 //Logging in
@@ -21,16 +21,15 @@ router.get('/auth/google', passport.authenticate(
 router.get('/oauth2callback', passport.authenticate(
   'google',
   {
-    successRedirect: '/home',
-    //chnaage to whats best for your app
-    failureRedirect: '/home'
+    successRedirect: '/',
+    failureRedirect: '/'
   }
 ));
 
 router.get('/logout', function(req, res){
   req.logout(function(){
-    res.redirect('/home') //<-- chnage path for your landing page/app
-  })//<--- added by passport 
+    res.redirect('/')
+  })
 });
 
 

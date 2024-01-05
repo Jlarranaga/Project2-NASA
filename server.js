@@ -25,6 +25,7 @@ app.set('view engine', 'ejs')
 const apodRouter = require('./controllers/apodControllers')
 const imageVideoLib = require('./controllers/imageVidLibControllers')
 const favoriteRouter = require('./controllers/favoriteControllers')
+const passportRouter = require('./controllers/passportController')
 
 //************************ Middleware ******************************//
 middleware(app);
@@ -39,10 +40,10 @@ app.use(function (req, res, next) {
     next();
   });
 
-app.get('/', (req, res) =>{ //<-- Home Page
-    //TODO Add user verfication here
-    res.render('home.ejs')
-})
+// app.get('/', (req, res) =>{ //<-- Home Page
+//     //TODO Add user verfication here
+//     res.render('home.ejs')
+// })
 
 app.use(bodyParser.urlencoded({
     extended: true
@@ -53,7 +54,7 @@ app.use(session({
     saveUninitialized: true
   }));
   
-
+app.use('/', passportRouter)
 app.use('/apod', apodRouter)
 app.use('/imageVideoLib', imageVideoLib)
 app.use('/favorite', favoriteRouter)
