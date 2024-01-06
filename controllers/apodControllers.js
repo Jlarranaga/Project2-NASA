@@ -2,10 +2,9 @@
 const express = require('express')
 const axios = require('axios')
 const Favorites = require('../models/favorite')
-const apod = process.env.APOD_API_URL  //TODO <-------------
+const apod = process.env.APOD_API_URL  
 const imageVideoLib = process.env.IMAGE_VIDEO_LIBRARY
-
-const apiKey = process.env.API_KEY //TODO <--------------
+const apiKey = process.env.API_KEY 
 
 //const Place = require('../models/place')
 

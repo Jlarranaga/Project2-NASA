@@ -7,8 +7,11 @@ const Schema = mongoose.Schema;
 
 const imageVideoLibSchema = new Schema ({ //TODO update schemas data variables
     title: String,
-    url: String,
-    date: String
+    nasa_id: String,
+    date: String,
+    media_type: String,
+    description: String,
+    media: String
 })
 
 const apodSchema = new Schema ({
@@ -24,7 +27,8 @@ const favSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: user,
         required: true
-    }
+    },
+    favorite: {type: Boolean, required: true}
 })
 
 

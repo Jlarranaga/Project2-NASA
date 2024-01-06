@@ -4,6 +4,7 @@ const axios = require('axios')
 const Apod = require('../models/apod')
 const apod = process.env.APOD_API_URL  //TODO <-------------
 const imageVideoLib = process.env.IMAGE_VIDEO_LIBRARY
+const Favorite = require('../models/favorite')
 
 const apiKey = process.env.API_KEY //TODO <--------------
 
@@ -50,14 +51,33 @@ router.post('/videoIndex', (req, res) =>{
 
 //Showing the video or image and able to favorite and save to users list
 router.get('/:id', (req,res)=>{
-
+    const {user} = req.session.passport
     const id = req.params.id
+    let onFavList = false
+    
+    Favorite.find({owner: user})
+        .then(ownerFavs =>{
+            if(ownerFavs.length !== 0){
+
+            for(let i = 0; i<ownerFavs.length; i++){
+            if(ownerFavs[i].imageVideoLib[0].nasa_id === id ){
+                onFavList = true
+                break
+            }else{
+                onFavList = false
+            }
+    }
+        }
+        })
+   
 
     axios(`${imageVideoLib}/search?nasa_id=${id}`)
     .then(apiRes =>{
         const foundData = apiRes.data
-        res.render('imageVideoLib/show', {imageVideo: foundData})
+        console.log('FOUND DATA: ', foundData)
+        res.render('imageVideoLib/show', {imageVideo: foundData, favorite: onFavList})
     })
+    
 })
 
 //********************* Export **********************//

@@ -1,0 +1,31 @@
+<%- include('../partials/header') %>
+
+<div class="container center">
+
+    <h2>Favorite's List</h2>
+
+</div>
+
+<div class="container center">
+    <div class="container row text-center">
+        <% imageVideo.forEach(function (i){ %>
+
+        <% i.imageVideoLib.forEach(function(i){ %>
+            
+            <div class="card mt-3 me-3 countryCard">
+                
+                <!-- TODO Add if statment for video or image below. else do video tag -->
+                <img src="<%= i.media %>" alt="NASA Image" class="card-img-top mt-3">
+                <div class="card-body">
+                    <h5 class="card-title"><%= i.title%></h5>
+                    
+                    <a href="/favorite/<%= i.nasa_id%>" class="btn" value="image">Favorite Details</a>
+                </div>
+            </div>
+           
+        <% }) %>
+        <%})%>
+    </div>
+</div>
+
+<%- include('../partials/footer') %>

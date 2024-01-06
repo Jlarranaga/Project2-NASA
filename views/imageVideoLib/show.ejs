@@ -52,14 +52,25 @@
         <% }%>
 
         <% if(user){ %>
-            <h5>Add to Favorites?</h5>
+            <%console.log('FAVLIST EJS: ', favorite)%>
+            <% if(favorite === true){ %>
+                
+                <h5>This is already in your favorites!</h5>
+            <%}else{%>
+                
+                <h5>Add to Favorites?</h5>
             <form action="../favorite/add" method="POST">
                 <fieldset>
-                <input hidden type="text" name="item" value="<%= imageVideo %>">
-                <input hidden type="text" name="user" value="<% user %>">
+                <input hidden type="text" name="title" value="<%= imageVideo.collection.items[0].data[0].title %>">
+                <input hidden type="text" name="nasa_id" value="<%= imageVideo.collection.items[0].data[0].nasa_id%>">
+                <input hidden type="text" name="date" value="<%= imageVideo.collection.items[0].data[0].date_created %>">
+                <input hidden type="text" name="media_type" value="<%= imageVideo.collection.items[0].data[0].media_type %>">
+                <input hidden type="text" name="description" value="<%= imageVideo.collection.items[0].data[0].description %>">
+                <input hidden type="text" name="media" value="<%= imageVideo.collection.items[0].links[0].href %>">
             </fieldset>
             <input type="submit" value="Add Favorite">
             </form>
+                <%}%>
             <% } else { %>
                 <a href="../auth/google">Log in</a>
                 <% } %>
