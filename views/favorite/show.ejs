@@ -4,6 +4,9 @@
 <div class="container center">
 
     <h1>Favorite's List</h1>
+
+    <%if(Array.isArray(imageVideo)){ %>
+    
     <% console.log('IMAGE VIDEO ', imageVideo[0])%>
     <h2><%= imageVideo[0].imageVideoLib[0].title %></h2>
     <% if(imageVideo[0].imageVideoLib[0].media_type === 'image'){%>
@@ -11,7 +14,7 @@
     <div class="container col" style="width: 18rem">
         <img src="<%= imageVideo[0].imageVideoLib[0].media%>" alt="NASA Image" class="nasaImage">
     </div>
-    <% }else{ %>
+    <% }else if(imageVideo[0].imageVideoLib[0].media_type === 'video'){ %>
 
         <div class="container col" style="width: 18rem">
         
@@ -41,6 +44,46 @@
                 <form action="../favorite/delete/<%=imageVideo[0].imageVideoLib[0].nasa_id%>?_method=DELETE" method="POST">
                     <input type="submit" value="delete favorite">
                     </form>
+
+<%} else if(!Array.isArray(imageVideo)){ %>
+    <% console.log('IMAGE VIDEO ', imageVideo[0])%>
+    <h2><%= imageVideo.imageVideoLib[0].title %></h2>
+    <% if(imageVideo.imageVideoLib[0].media_type === 'image'){%>
+
+    <div class="container col" style="width: 18rem">
+        <img src="<%= imageVideo.imageVideoLib[0].media%>" alt="NASA Image" class="nasaImage">
+    </div>
+    <% }else if(imageVideo.imageVideoLib[0].media_type === 'video'){ %>
+
+        <div class="container col" style="width: 18rem">
+        
+            <video playsinline controls autoplay class="nasaVideo">
+            <source src="<%= imageVideo.imageVideoLib[0].media%>">
+        </video>
+        </div>
+        <% }%>
+    <table class="table table-striped mt-3">
+        <thead>
+            <tr>
+                <th scope="col">Date</th>
+                <th scope="col">Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td scope="row"><%= imageVideo.imageVideoLib[0].date%></td>
+                <td scope="row"><%= imageVideo.imageVideoLib[0].description%></td>
+            </tr>
+        </tbody>
+    </table>
+    <a href="../favorite/all"> Back to Favorites</a>
+                
+                <h5>Currently in your favorites!</h5>
+        
+                <form action="../favorite/delete/<%=imageVideo.imageVideoLib[0].nasa_id%>?_method=DELETE" method="POST">
+                    <input type="submit" value="delete favorite">
+                    </form>
+<%}%>
 
 </div>
 

@@ -39,6 +39,9 @@ router.post('/add', async (req, res) =>{
     const ivl = req.body
     favorite.owner = user
     favorite.favorite = true
+
+    ivl.date_created = !!ivl.date_created
+    ivl.description = !!ivl.description
     
     favorite.imageVideoLib.push(ivl)
         try {
@@ -53,53 +56,30 @@ router.post('/add', async (req, res) =>{
 })
 
 //Deleting Favorite Item
-//TODO FIX favorite index not working, your not calling it when you look at fav details
 router.delete('/delete/:id', (req,res, next) =>{
-    console.log('INSIDE DELETE METHOD')
 const {user} = req.session.passport
 const id = req.params.id
 
-    
     Favorite.find({owner: user})
         .then(ownerFavs =>{
-            console.log('inside .then')
             for(let i = 0; i<ownerFavs.length; i++){
-                console.log('inside for loop')
             if(ownerFavs[i].imageVideoLib[0].nasa_id === id ){
-                console.log('inside if statement in for loop')
                 if(ownerFavs[i].owner == user){
-                    console.log('inside 2nd if statement, attempting to delete')
-                    //ownerFavs.deleteOne()
-                    //console.log('OWNERFAVS[i]: ', ownerFavs[i])
-                    //ownerFavs[i].remove(id)
                     return ownerFavs[i].deleteOne()
-                //     console.log('OWNERFAVS[i]: ', ownerFavs[i])
-                //    ownerFavs[i].save().then(function(){
-                //         console.log('inside .then of save function after delete')
-                //         res.redirect('/favorite/all')
-                //         //next()
-                //     })
-                //     break
                 }else{
                     res.redirect(`/error?error=You%20Are%20Not%20Allowed%20to%20Delete%20this%20Favorite`)
                 }
-                //break
             }else{
-                console.log('Didnt attemot to delete!!')
-                //onFavList = false
+                
             }
-    
         }
         })
         .then(deletedFavorite => {
-            console.log('SUCCESS, DELETED')
             res.redirect('/favorite/all')
         })
         .catch(err => {
             res.redirect(`/error?error=${err}`)
-            console.log('Didnt attemot to delete at all!!')
         })
-    
 })
 
 router.post('/videoIndex', (req, res) =>{
@@ -117,17 +97,18 @@ router.post('/videoIndex', (req, res) =>{
 
 //Showing the video or image and able to favorite and save to users list
 router.get('/:id', (req,res)=>{
-    //TODO upate to show from favorites. 
 const {user} = req.session.passport
 const id = req.params.id
-
+console.log('ID SENT: ', id)
     
     Favorite.find({owner: user})
         .then(ownerFavs =>{
             for(let i = 0; i<ownerFavs.length; i++){
             if(ownerFavs[i].imageVideoLib[0].nasa_id === id ){
+                console.log('FAV ID: ', ownerFavs[i].imageVideoLib[0].nasa_id)
                 
-                res.render('favorite/show', {imageVideo: ownerFavs})
+                res.render('favorite/show', {imageVideo: ownerFavs[i]})
+                console.log('OWNERFAVS: ', ownerFavs[i])
                 return
             }
     

@@ -61,11 +61,14 @@
                 <h5>Add to Favorites?</h5>
             <form action="../favorite/add" method="POST">
                 <fieldset>
+                    <h5>Check mark what you would like to save</h5>
                 <input hidden type="text" name="title" value="<%= imageVideo.collection.items[0].data[0].title %>">
                 <input hidden type="text" name="nasa_id" value="<%= imageVideo.collection.items[0].data[0].nasa_id%>">
-                <input hidden type="text" name="date" value="<%= imageVideo.collection.items[0].data[0].date_created %>">
+                <label for="date">Date</label>
+                <input type="checkbox" name="date" value="<%= imageVideo.collection.items[0].data[0].date_created %>">
                 <input hidden type="text" name="media_type" value="<%= imageVideo.collection.items[0].data[0].media_type %>">
-                <input hidden type="text" name="description" value="<%= imageVideo.collection.items[0].data[0].description %>">
+                <label for="description">Description</label>
+                <input type="checkbox" name="description" value="<%= imageVideo.collection.items[0].data[0].description %>">
                 <input hidden type="text" name="media" value="<%= imageVideo.collection.items[0].links[0].href %>">
             </fieldset>
             <input type="submit" value="Add Favorite">
@@ -74,13 +77,6 @@
             <% } else { %>
                 <a href="../auth/google">Log in</a>
                 <% } %>
-
-                
-
-    <% console.log('passed info: ', imageVideo) %>
-<button type="button" id="playPause"><%//vid%></button>
-
-
 </div>
 
 <%- include('../partials/footer') %>
