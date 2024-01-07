@@ -29,11 +29,12 @@ const passportRouter = require('./controllers/passportController')
 
 //************************ Middleware ******************************//
 middleware(app);
-
-//************************ Routes **********************************//
 app.use(passport.initialize());
 app.use(passport.session());
 app.use("/public/videos", express.static(__dirname + "/public/videos"))
+app.use(express.static(path.join(__dirname, 'public')));
+
+//************************ Routes **********************************//
 
 app.use(function (req, res, next) {
     res.locals.user = req.user;

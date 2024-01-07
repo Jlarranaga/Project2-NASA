@@ -55,6 +55,7 @@ router.post('/add', async (req, res) =>{
 //Deleting Favorite Item
 //TODO FIX favorite index not working, your not calling it when you look at fav details
 router.delete('/delete/:id', (req,res, next) =>{
+    console.log('INSIDE DELETE METHOD')
 const {user} = req.session.passport
 const id = req.params.id
 
@@ -68,7 +69,7 @@ const id = req.params.id
                     ownerFavs.deleteOne()
                     ownerFavs.save().then(function(){
                         res.redirect('/favorite/all')
-                        
+                        next()
                     })
                     break
                 }else{
@@ -76,6 +77,7 @@ const id = req.params.id
                 }
                 //break
             }else{
+                console.log('Didnt attemot to delete!!')
                 //onFavList = false
             }
     
@@ -83,6 +85,7 @@ const id = req.params.id
         })
         .catch(err => {
             res.redirect(`/error?error=${err}`)
+            console.log('Didnt attemot to delete at all!!')
         })
 
         // .then(deletedFavorite => {

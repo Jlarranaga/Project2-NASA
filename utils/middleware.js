@@ -11,6 +11,7 @@ const middleware = (app) => {
     //Middleware runs BEFORE ALL ROUTES! 
     //EVERY request is first processed through middlware
     //Middlware allows us to use forms to their full potential
+    
     app.use(methodOverride('_method'))
 
     //This will allow us to get data from forms (HTML Pages) req.body
@@ -21,7 +22,7 @@ const middleware = (app) => {
 
     //To serve stylesheets we use static public
     app.use(express.static('public'))
-
+    
     //Utilize JSON:
     app.use(express.json())
 
