@@ -7,7 +7,7 @@
 
     <%if(Array.isArray(imageVideo)){ %>
     
-    <% console.log('IMAGE VIDEO ', imageVideo[0])%>
+    
     <h2><%= imageVideo[0].imageVideoLib[0].title %></h2>
     <% if(imageVideo[0].imageVideoLib[0].media_type === 'image'){%>
 
@@ -46,7 +46,7 @@
                     </form>
 
 <%} else if(!Array.isArray(imageVideo)){ %>
-    <% console.log('IMAGE VIDEO ', imageVideo[0])%>
+    
     <h2><%= imageVideo.imageVideoLib[0].title %></h2>
     <% if(imageVideo.imageVideoLib[0].media_type === 'image'){%>
 

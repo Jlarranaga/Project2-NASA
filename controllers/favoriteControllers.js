@@ -41,18 +41,22 @@ router.post('/add', async (req, res) =>{
     favorite.favorite = true
 
     ivl.date_created = !!ivl.date_created
-    ivl.description = !!ivl.description
     
     favorite.imageVideoLib.push(ivl)
         try {
             await favorite.save()
-            console.log("Saved SUCCESS!")
         }catch (err){
             console.log('ERROR', err)
         }   
             
-    res.render('favorite/all', {imageVideo: favorite})
-    console.log('favorite: ', favorite)//TODO Delete this line 
+        Favorite.find({owner: user})
+        .then(ownerFavs =>{
+            res.render('favorite/all', {imageVideo: ownerFavs})
+        })
+        .catch(err =>{
+            console.log(err)
+        })
+
 })
 
 //Deleting Favorite Item
