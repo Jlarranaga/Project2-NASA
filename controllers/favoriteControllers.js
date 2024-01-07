@@ -62,16 +62,24 @@ const id = req.params.id
     
     Favorite.find({owner: user})
         .then(ownerFavs =>{
+            console.log('inside .then')
             for(let i = 0; i<ownerFavs.length; i++){
+                console.log('inside for loop')
             if(ownerFavs[i].imageVideoLib[0].nasa_id === id ){
-                
+                console.log('inside if statement in for loop')
                 if(ownerFavs[i].owner == user){
-                    ownerFavs.deleteOne()
-                    ownerFavs.save().then(function(){
-                        res.redirect('/favorite/all')
-                        next()
-                    })
-                    break
+                    console.log('inside 2nd if statement, attempting to delete')
+                    //ownerFavs.deleteOne()
+                    //console.log('OWNERFAVS[i]: ', ownerFavs[i])
+                    //ownerFavs[i].remove(id)
+                    return ownerFavs[i].deleteOne()
+                //     console.log('OWNERFAVS[i]: ', ownerFavs[i])
+                //    ownerFavs[i].save().then(function(){
+                //         console.log('inside .then of save function after delete')
+                //         res.redirect('/favorite/all')
+                //         //next()
+                //     })
+                //     break
                 }else{
                     res.redirect(`/error?error=You%20Are%20Not%20Allowed%20to%20Delete%20this%20Favorite`)
                 }
@@ -83,14 +91,14 @@ const id = req.params.id
     
         }
         })
+        .then(deletedFavorite => {
+            console.log('SUCCESS, DELETED')
+            res.redirect('/favorite/all')
+        })
         .catch(err => {
             res.redirect(`/error?error=${err}`)
             console.log('Didnt attemot to delete at all!!')
         })
-
-        // .then(deletedFavorite => {
-        //     res.redirect('/favorite/all')
-        // })
     
 })
 
