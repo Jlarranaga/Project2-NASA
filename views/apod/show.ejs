@@ -1,38 +1,59 @@
 <%- include('../partials/header') %>
 <body>
-    <div class="apod">
-        <iframe src="/public/audio/wandering-6394.mp3" allow="autoplay" allow="loop" style="display:none" id="iframeAudio">
-        </iframe> 
-    <video playsinline preload="auto" autoplay muted loop src="/public/videos/apodBackground.mp4" type="video/mp4" id="homeBackground">
-    </video>
+  <div class="apod">
+    <iframe
+      src="/public/audio/wandering-6394.mp3"
+      allow="autoplay"
+      allow="loop"
+      style="display: none"
+      id="iframeAudio"
+    >
+    </iframe>
+    <video
+      playsinline
+      preload="auto"
+      autoplay
+      muted
+      loop
+      src="/public/videos/apodBackground.mp4"
+      type="video/mp4"
+      id="homeBackground"
+    ></video>
     <h2 class="apodTitle"><%= apod.title%></h2>
-    <img class="apodImage" src=<%= apod.url%> alt="NASA image of the day">
+    <img class="apodImage" src="<%=apod.url %>" alt="NASA image of the day">
     <h4 id="apodExpl"><%= apod.explanation%></h4>
 
-    <% if(user){ %>
-            
-        <% if(favorite === true){ %>
-            
-            <h5>This is already in your favorites!</h5>
-        <%}else{%>
-            
-            <h5>Add to Favorites?</h5>
-        <form action="../favorite/add" method="POST">
-            <fieldset>
-                
-            <input hidden type="text" name="title" value="<%= apod.title %>">
-            <input hidden type="text" name="media" value="<%= apod.url%>">
-            <input hidden type="text" name="date" value="<%= apod.date %>">
-            <input hidden type="text" name="media_type" value="<%= apod.media_type %>">
-            <input hidden type="text" name="description" value="<%= apod.explanation %>">
-        </fieldset>
-        <input class="favBtn" type="submit" value="Add Favorite">
-        </form>
-            <%}%>
-        <% } else { %>
-            <a href="../auth/google">Log in</a>
-            <% } %>
-        </div>
+    <% if(user){ %> <% if(favorite === true){ %>
+
+    <h5>This is already in your favorites!</h5>
+    <%}else{%>
+
+    <h5>Add to Favorites?</h5>
+    <form action="../favorite/add" method="POST">
+      <fieldset>
+        <input hidden type="text" name="title" value="<%= apod.title %>" />
+        <input hidden type="text" name="media" value="<%= apod.url%>" />
+        <input hidden type="text" name="date" value="<%= apod.date %>" />
+        <input
+          hidden
+          type="text"
+          name="media_type"
+          value="<%= apod.media_type %>"
+        />
+        <input
+          hidden
+          type="text"
+          name="description"
+          value="<%= apod.explanation %>"
+        />
+      </fieldset>
+      <input class="favBtn" type="submit" value="Add Favorite" />
+    </form>
+    <%}%> 
+    <% } else { %>
+    <a href="../auth/google">Log in</a>
+    <% } %>
+  </div>
 </body>
 
 <%- include('../partials/footer') %>
