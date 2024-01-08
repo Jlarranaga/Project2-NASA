@@ -15,17 +15,12 @@
 <div class="container center">
     <div class="container row text-center">
         <% imageVideo.collection.items.forEach(function(i){ %>
-            <% //console.log('items: ', i)%>
-            <% //console.log('title: ', i.data[0].title)%>
-            <% //console.log('nasa id: ', i.data[0].nasa_id)%>
+           
             <% if(i.links){ %>
-            <%// console.log('image: !!! \n', i.links)%>
             <div class="card mt-3 me-3 countryCard">
-                <% //const img = i.links[0].href %>
                 <img src="<%= i.links[0].href %>" alt="NASA Image" class="card-img-top mt-3">
                 <div class="card-body">
                     <h5 class="card-title"><%= i.data[0].title%></h5>
-                    <% console.log('media type: ', i.data[0].media_type)%>
                     <a href="/imageVideoLib/<%= i.data[0].nasa_id%>" class="btn" value="image">Image Details</a>
                 </div>
             </div>

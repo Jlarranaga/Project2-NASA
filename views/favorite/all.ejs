@@ -17,7 +17,7 @@
             
             <div class="card mt-3 me-3 countryCard">
                 
-                <!-- TODO Add if statment for video or image below. else do video tag -->
+                <!-- Add if statment for video or image below. else do video tag -->
                 <img src="<%= i.media %>" alt="NASA Image" class="card-img-top mt-3">
                 <div class="card-body">
                     <h5 class="card-title"><%= i.title%></h5>
@@ -29,11 +29,10 @@
         <% }) %>
         <%})%>
         <% }else if(!Array.isArray(imageVideo)){ %>
-            <% //imageVideo.imageVideoLib.forEach(function(i){ %>
             
                 <div class="card mt-3 me-3 countryCard">
                     
-                    <!-- TODO Add if statment for video or image below. else do video tag -->
+                    <!-- Add if statment for video or image below. else do video tag -->
                     <img src="<%= imageVideo.imageVideoLib.media %>" alt="NASA Image" class="card-img-top mt-3">
                     <div class="card-body">
                         <h5 class="card-title"><%= imageVideo.imageVideoLib.title%></h5>
