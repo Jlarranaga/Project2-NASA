@@ -1,3 +1,8 @@
+@font-face {
+    font-family: orbitron;
+    src: url('/public/font/Orbitron-VariableFont_wght.ttf');
+}
+
 .login {
     display: flex;
     justify-content: center;
@@ -22,9 +27,16 @@
   }
 
   .h1Home {
+    display: flex;
     text-shadow: 0 0 5px #fcfcfc, 0 0 5px #ffffff;
     color: rgb(5, 5, 5);
     text-align: center;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    font-size: 10vh;
+    font-weight: bold;
+    font-family: 'Orbitron', sans-serif;
   }
 
   .navbar{
@@ -95,10 +107,18 @@
     text-align: center;
   }
 
-  .searchBox{
-    align-self: center;
-    justify-content: center;
-    justify-self: center;
-    place-self: center;
+ 
+  .searchBox1 {
     padding: 1vmin;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .seachBox2{
+    padding: 1vh;
+  }
+
+  .favShow {
+    text-shadow: 0 0 5px #fcfcfc, 0 0 5px #ffffff;
+    color: rgb(5, 5, 5);
   }

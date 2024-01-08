@@ -2,10 +2,14 @@
 
 <div class="container center">
 
+    <iframe src="/public/audio/wandering-6394.mp3" allow="autoplay" style="display:none" id="iframeAudio">
+    </iframe> 
+    <video playsinline preload="auto" autoplay muted loop src="/public/videos/ImageVideoBackground.mp4" type="video/mp4" id="homeBackground">
+    </video>
     <% if(imageVideo.collection.items[0].data[0].media_type === 'image'){%>
 
-    <h2><%= imageVideo.collection.items[0].data[0].title %></h2>
-    <div class="container col" style="width: 18rem">
+    <h2 class="h2Search"><%= imageVideo.collection.items[0].data[0].title %></h2>
+    <div class="container col text-center" style="width: 18rem">
         <img src="<%= imageVideo.collection.items[0].links[0].href%>" alt="NASA Image" class="nasaImage">
     </div>
     <table class="table table-striped mt-3">
@@ -55,19 +59,19 @@
             
             <% if(favorite === true){ %>
                 
-                <h5>This is already in your favorites!</h5>
+                <h5 class="h2Search">This is already in your favorites!</h5>
             <%}else{%>
                 
-                <h5>Add to Favorites?</h5>
+                <h5 class="favShow" >Add to Favorites?</h5>
             <form action="../favorite/add" method="POST">
                 <fieldset>
-                    <h5>Check mark what you would like to save</h5>
+                    <h5 class="favShow">Check mark what you would like to save</h5>
                 <input hidden type="text" name="title" value="<%= imageVideo.collection.items[0].data[0].title %>">
                 <input hidden type="text" name="nasa_id" value="<%= imageVideo.collection.items[0].data[0].nasa_id%>">
-                <label for="date">Date</label>
+                <label for="date" class="favShow">Date</label>
                 <input type="checkbox" name="date" value="<%= imageVideo.collection.items[0].data[0].date_created %>">
                 <input hidden type="text" name="media_type" value="<%= imageVideo.collection.items[0].data[0].media_type %>">
-                <label for="description">Description</label>
+                <label for="description" class="favShow">Description</label>
                 <input type="checkbox" name="description" value="<%= imageVideo.collection.items[0].data[0].description %>">
                 <input hidden type="text" name="media" value="<%= imageVideo.collection.items[0].links[0].href %>">
             </fieldset>

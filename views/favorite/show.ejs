@@ -2,13 +2,16 @@
 
 
 <div class="container center">
-
-    <h1>Favorite's List</h1>
+    <iframe src="/public/audio/wandering-6394.mp3" allow="autoplay" style="display:none" id="iframeAudio">
+    </iframe> 
+    <video playsinline preload="auto" autoplay muted loop src="/public/videos/nebulaBackground.mp4" type="video/mp4" id="homeBackground">
+    </video>
+    <h1 class="h2Search">Favorite's List</h1>
 
     <%if(Array.isArray(imageVideo)){ %>
     
     
-    <h2><%= imageVideo[0].imageVideoLib[0].title %></h2>
+    <h2 class="h2Search"><%= imageVideo[0].imageVideoLib[0].title %></h2>
     <% if(imageVideo[0].imageVideoLib[0].media_type === 'image'){%>
 
     <div class="container col" style="width: 18rem">
@@ -39,10 +42,10 @@
     </table>
     <a href="../favorite/all"> Back to Favorites</a>
                 
-                <h5>Update information in Favorites?</h5>
+                <h5 class="favShow">Update information in Favorites?</h5>
                 <form action="../favorite/update/<%= imageVideo[0].imageVideoLib[0].nasa_id%>?_method=PUT" method="POST">
                     <fieldset>
-                        <h5>Check mark what you would like to </h5>
+                        <h5 class="favShow">Check mark what you would like to add or remove </h5>
                     <input hidden type="text" name="title" value="<%= imageVideo[0].imageVideoLib[0].title %>">
                     <input hidden type="text" name="nasa_id" value="<%= imageVideo[0].imageVideoLib[0].nasa_id%>">
                     <label for="date">Date</label>
@@ -60,7 +63,7 @@
 
 <%} else if(!Array.isArray(imageVideo)){ %>
     
-    <h2><%= imageVideo.imageVideoLib[0].title %></h2>
+    <h2 class="h2Search"><%= imageVideo.imageVideoLib[0].title %></h2>
     <% if(imageVideo.imageVideoLib[0].media_type === 'image'){%>
 
     <div class="container col" style="width: 18rem">
@@ -91,16 +94,16 @@
     </table>
     <a href="../favorite/all"> Back to Favorites</a>
                 
-                <h5>Update information in Favorites?</h5>
+                <h5 class="favShow">Update information in Favorites?</h5>
                 <form action="../favorite/update/<%= imageVideo.imageVideoLib[0].nasa_id%>?_method=PUT" method="POST">
                     <fieldset>
-                        <h5>Check or uncheck to add or remove </h5>
+                        <h5 class="favShow" >Check or uncheck to add or remove </h5>
                     <input hidden type="text" name="title" value="<%= imageVideo.imageVideoLib[0].title %>">
                     <input hidden type="text" name="nasa_id" value="<%= imageVideo.imageVideoLib[0].nasa_id%>">
-                    <label for="date">Date</label>
+                    <label for="date" class="favShow">Date</label>
                     <input type="checkbox" name="date" <%= imageVideo.imageVideoLib[0].date ? 'checked' : '' %>>
                     <input hidden type="text" name="media_type" value="<%= imageVideo.imageVideoLib[0].media_type %>">
-                    <label for="description">Description</label>
+                    <label for="description" class="favShow">Description</label>
                     <input type="checkbox" name="description" <%= imageVideo.imageVideoLib[0].description ? 'checked' : '' %>>
                     <input hidden type="text" name="media" value="<%= imageVideo.imageVideoLib[0].media %>">
                 </fieldset>

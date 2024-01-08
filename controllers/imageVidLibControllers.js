@@ -7,6 +7,9 @@ const imageVideoLib = process.env.IMAGE_VIDEO_LIBRARY
 const Favorite = require('../models/favorite')
 const apiKey = process.env.API_KEY 
 
+//***************************** DOM Elements & Constants ***************//
+//const wanderAudio = new Audio("/public/audio/wandering-6394.mp3")
+
 //************************* Create Router *****************************//
 const router = express.Router()
 
@@ -20,6 +23,7 @@ router.get('/search', (req, res) =>{
 
 //Search response with all images matching search keywords
 router.post('/imageIndex', (req, res) =>{
+    //wanderAudio.play();
     const {search} = req.body
    
     axios(`${imageVideoLib}/search?q=${search}&media_type=image&page_size=50`) //<-- add "/search?q={'KEYWORD HERE'}"

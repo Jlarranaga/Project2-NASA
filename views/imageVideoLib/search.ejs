@@ -1,25 +1,25 @@
 <%- include('../partials/header') %>
 <body class="imageVideoSearch">
     
-
+    <iframe src="/public/audio/wandering-6394.mp3" allow="autoplay" style="display:none" id="iframeAudio">
+    </iframe> 
 <video playsinline preload="auto" autoplay muted loop src="/public/videos/ImageVideoBackground.mp4" type="video/mp4" id="homeBackground">
 </video>
 <div class="container center">
 
     <h2 class="h2Search">Search NASA's Image and Video Library</h2>
-
-    <form action="/imageVideoLib/imageIndex" method="POST" class="searchBox">
+<div class="searchBox1">
+    <form action="/imageVideoLib/imageIndex" method="POST" class="searchBox2">
         <input type="text" placeholder="Image Search" name="search"> 
         <input type="submit">
     </form>
 
-    
 
-    <form action="/imageVideoLib/videoIndex" method="POST" class="searchBox">
+    <form action="/imageVideoLib/videoIndex" method="POST" class="searchBox2">
         <input type="text" placeholder="Video Search" name="search" >
         <input type="submit">
     </form>
-
+</div>
     
 </div>
 

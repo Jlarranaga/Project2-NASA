@@ -32,6 +32,7 @@ middleware(app);
 app.use(passport.initialize());
 app.use(passport.session());
 app.use("/public/videos", express.static(__dirname + "/public/videos"))
+app.use("/public/audio", express.static(__dirname + "/public/audio"))
 app.use(express.static(path.join(__dirname, 'public')));
 
 //************************ Routes **********************************//
@@ -40,12 +41,6 @@ app.use(function (req, res, next) {
     res.locals.user = req.user;
     next();
   });
-
-// app.get('/', (req, res) =>{ //<-- Home Page
-//     //TODO Add user verfication here
-//     res.render('home.ejs')
-// })
-
 app.use(bodyParser.urlencoded({
     extended: true
 }));
