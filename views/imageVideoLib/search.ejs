@@ -1,29 +1,28 @@
 <%- include('../partials/header') %>
+<body class="imageVideoSearch">
+    
 
+<video playsinline preload="auto" autoplay muted loop src="/public/videos/ImageVideoBackground.mp4" type="video/mp4" id="homeBackground">
+</video>
 <div class="container center">
 
-    <h2>NASA Image and Video Library</h2>
+    <h2 class="h2Search">Search NASA's Image and Video Library</h2>
 
-    <form action="/imageVideoLib/imageIndex" method="POST">
-
-        <input type="text" placeholder="Image Search" name="search"><br>
-        <input type="radio" name="imageVideo" id="image" value="image">
-        <label for="image">Image</label> <br>
-        <input type="radio" name="imagevideo" id="video" value="video">
-        <label for="video">Video</label><br>
-        
+    <form action="/imageVideoLib/imageIndex" method="POST" class="searchBox">
+        <input type="text" placeholder="Image Search" name="search"> 
         <input type="submit">
     </form>
 
     
 
-    <form action="/imageVideoLib/videoIndex" method="POST">
-
-        <input type="text" placeholder="Video Search" name="search">
+    <form action="/imageVideoLib/videoIndex" method="POST" class="searchBox">
+        <input type="text" placeholder="Video Search" name="search" >
         <input type="submit">
     </form>
 
-    <img src='' alt="NASA image of the day"> 
+    
 </div>
+
+</body>
 
 <%- include('../partials/footer') %>

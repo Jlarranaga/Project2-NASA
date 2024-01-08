@@ -1,16 +1,15 @@
 <%- include('../partials/header') %>
+<body class="imageVideoIndex">
+    
+
+    <video playsinline preload="auto" autoplay muted loop src="/public/videos/ImageVideoBackground.mp4" type="video/mp4" id="homeBackground">
+    </video>
 
 <div class="container center">
 
-    <h2>NASA Image Library Index</h2>
+    <h2 class="h2Search">NASA Image Library Index</h2>
 
-    <!-- <form action="/imageVideoLib/index" method="GET">
-
-        <input type="text" placeholder="Image/Video Search">
-        <input type="submit">
-    </form>
-
-    <img src='' alt="NASA image of the day">  -->
+    
 </div>
 
 <div class="container center">
@@ -34,5 +33,5 @@
         <% }) %>
     </div>
 </div>
-
+</body>
 <%- include('../partials/footer') %>

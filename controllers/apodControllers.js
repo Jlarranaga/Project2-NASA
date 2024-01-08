@@ -1,7 +1,7 @@
 //************************* Import Dependencies ***********************//
 const express = require('express')
 const axios = require('axios')
-const Favorites = require('../models/favorite')
+const Favorite = require('../models/favorite')
 const apod = process.env.APOD_API_URL  
 const imageVideoLib = process.env.IMAGE_VIDEO_LIBRARY
 const apiKey = process.env.API_KEY 
@@ -15,11 +15,36 @@ const router = express.Router()
 //TODO Add date search functionality to search different days APOD
 // ** APOD */
 router.get('/show', (req, res)=>{
+    const {user} = req.session.passport
+    let onFavList = false
+
+    console.log("USER: ",user)
 
     axios(`${apod}?api_key=${apiKey}`)
         .then(apiRes => {
             const foundData = apiRes.data
-            res.render('apod/show', {apod: foundData})
+
+    Favorite.find({owner: user})
+    .then(ownerFavs =>{
+    if(ownerFavs.length !== 0){
+        
+        for(i=0; i<ownerFavs.length; i++){
+        if(ownerFavs[i].apods.length !== 0){
+
+            for(let i = 0; i<ownerFavs.length; i++){
+                if(ownerFavs[i].apods[0].url === foundData.url){
+                    onFavList = true
+                    break
+                }else{
+                    onFavList = false
+                }
+            }
+        }
+    }
+    }
+    })
+            console.log('APOD DATA: ', foundData)
+            res.render('apod/show', {apod: foundData, favorite: onFavList})
         })
 })
 

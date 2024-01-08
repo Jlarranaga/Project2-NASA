@@ -40,7 +40,8 @@ router.post('/add', async (req, res) =>{
     favorite.owner = user
     favorite.favorite = true
 
-    ivl.date_created = !!ivl.date_created
+    //ivl.date_created = !!ivl.date_created
+    //ivl.description = !!ivl.description
     
     favorite.imageVideoLib.push(ivl)
         try {
@@ -121,13 +122,81 @@ console.log('ID SENT: ', id)
         .catch(err => {
             res.redirect(`/error?error=${err}`)
         })
+})
 
+//Updating Favorite
+router.put('/update/:id', async (req,res, next) => {
+    const {user} = req.session.passport
+    const id = req.params.id
 
-    // axios(`${imageVideoLib}/search?nasa_id=${id}`)
-    // .then(apiRes =>{
-    //     const foundData = apiRes.data
-    //     res.render('favorite/index', {imageVideo: foundData})
-    // })
+    const updatedFav = req.body
+    
+    delete updatedFav.owner
+    updatedFav.owner = user
+
+    console.log('UPDATED FAV: ', updatedFav)
+    updatedFav.date = !!updatedFav.date
+    updatedFav.description = !!updatedFav.description
+
+    console.log('DESCRIPTION: ',updatedFav.date_created)
+    console.log('UPDATED FAV, REQ.BODY: ', updatedFav)
+
+    if(updatedFav.date === true){
+        try{
+        const apiRes = await axios(`${imageVideoLib}/search?nasa_id=${id}`) 
+        
+            const foundData = apiRes.data 
+            console.log('FOUND DATA: ', foundData)
+            console.log('FOUND DATA DEEPER: ', foundData.collection.items[0])
+            updatedFav.date = foundData.collection.items[0].data[0].date_created
+            console.log('UPDATED FAV: ', updatedFav)
+        } catch (err){
+            return res.redirect(`/error?error=${err}`)
+        }
+           
+    }
+
+    if(updatedFav.description === true){
+        try{
+            const apiRes = await axios(`${imageVideoLib}/search?nasa_id=${id}`) 
+                const foundData = apiRes.data 
+                updatedFav.description = foundData.collection.items[0].data[0].description
+            } catch (err){
+                return res.redirect(`/error?error=${err}`)
+            }
+    }
+
+    console.log('UPDATED FAV 2nd: ', updatedFav)
+
+    Favorite.find({owner: user})
+        .then(async ownerFavs =>{
+            for(let i = 0; i<ownerFavs.length; i++){
+            if(ownerFavs[i].imageVideoLib[0].nasa_id === id ){
+                if(ownerFavs[i].owner == user){
+                    
+            
+                    await ownerFavs[i].updateOne({$set: {"imageVideoLib": updatedFav}})
+                    console.log('UPDATING...')
+                    return
+                }else{
+                    res.redirect(`/error?error=You%20Are%20Not%20Allowed%20to%20Delete%20this%20Favorite`)
+                }
+                
+            }else{
+                
+            }
+            
+        }
+        
+        })
+        .then(updatedFavorite => {
+            console.log('INSIDE LAST .THEN')
+            res.redirect(`/favorite/${id}`)
+        })
+        .catch(err => {
+            res.redirect(`/error?error=${err}`)
+        })
+        
 })
 
 //********************* Export **********************//

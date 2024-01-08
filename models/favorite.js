@@ -17,7 +17,9 @@ const imageVideoLibSchema = new Schema ({ //TODO update schemas data variables
 const apodSchema = new Schema ({
     title: String,
     url: String,
-    date: String
+    date: String, 
+    media_type: String,
+    description: String
 })
 
 const favSchema = new Schema({
